@@ -1,0 +1,13 @@
+# NeuroVision dependencies (CPU-only).
+# Install PyTorch from the CPU wheel index first:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+# then:
+#   pip install -r requirements.txt
+torch
+torchvision
+scikit-learn
+scipy
+pillow
+numpy
+matplotlib
+flask
