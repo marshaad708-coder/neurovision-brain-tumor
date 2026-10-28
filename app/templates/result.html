@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NeuroVision — Result</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <h1>NeuroVision</h1>
+  <nav><a href="/">Classify another</a> · <a href="/metrics">Test metrics</a></nav>
+</header>
+<main>
+  <div class="disclaimer">{{ disclaimer }}</div>
+  <h2>Prediction: {{ result.predicted_display }}
+      <span class="conf">({{ "%.1f"|format(result.confidence * 100) }}% model confidence)</span></h2>
+  <div class="bars">
+  {% for name, p in result.probabilities.items() %}
+    <div class="bar-row"><span class="bar-label">{{ name }}</span>
+      <div class="bar"><div class="fill" style="width: {{ (p * 100)|round(1) }}%"></div></div>
+      <span class="bar-val">{{ "%.1f"|format(p * 100) }}%</span></div>
+  {% endfor %}
+  </div>
+  <p class="note">{{ calibration_note }}</p>
+  <div class="images">
+    <figure><img src="{{ input_uri }}" alt="Uploaded MRI"><figcaption>Uploaded MRI</figcaption></figure>
+    <figure><img src="{{ overlay_uri }}" alt="Grad-CAM overlay"><figcaption>Grad-CAM — regions that influenced the prediction</figcaption></figure>
+  </div>
+</main>
+<footer>NeuroVision — Muhammad Arshaad · Research/educational tool — not a medical diagnosis.</footer>
+</body>
+</html>

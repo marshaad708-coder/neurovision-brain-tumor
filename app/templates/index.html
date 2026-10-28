@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NeuroVision — Brain Tumor MRI Classification</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <h1>NeuroVision</h1>
+  <p class="sub">Brain Tumor MRI Classification — glioma · meningioma · pituitary · no tumor</p>
+  <nav><a href="/">Classify</a> · <a href="/metrics">Test metrics</a></nav>
+</header>
+<main>
+  <div class="disclaimer">{{ disclaimer }}</div>
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+  {% if not model_ready %}
+    <div class="error">Model checkpoint not found yet. Train first:
+      <code>python -m src.train --epochs 15</code>{% if model_error %} ({{ model_error }}){% endif %}</div>
+  {% else %}
+    <form action="/predict" method="post" enctype="multipart/form-data">
+      <label for="image">Upload a brain MRI image (jpg/png):</label>
+      <input type="file" id="image" name="image" accept=".jpg,.jpeg,.png,.bmp,.webp" required>
+      <button type="submit">Classify</button>
+    </form>
+    <p class="note">The result page shows the predicted class, the model's
+    confidence across all four classes, and a Grad-CAM heatmap of the regions
+    that influenced the prediction.</p>
+  {% endif %}
+</main>
+<footer>NeuroVision — Muhammad Arshaad · Research/educational tool — not a medical diagnosis.</footer>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NeuroVision — Test metrics</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <h1>NeuroVision — held-out test results</h1>
+  <nav><a href="/">Classify</a></nav>
+</header>
+<main>
+  <div class="disclaimer">{{ disclaimer }}</div>
+  {% if metrics %}
+  <p>Evaluated on the dataset's own Testing split ({{ metrics.test_images }} images),
+     which the model never trained on.</p>
+  <table>
+    <tr><th>Accuracy</th><td>{{ "%.4f"|format(metrics.accuracy) }}</td></tr>
+    <tr><th>Macro-F1</th><td>{{ "%.4f"|format(metrics.macro_f1) }}</td></tr>
+    <tr><th>AUROC (macro, one-vs-rest)</th><td>{{ "%.4f"|format(metrics.auroc_macro_ovr) }}</td></tr>
+  </table>
+  <h3>Per class</h3>
+  <table>
+    <tr><th>Class</th><th>Recall (sensitivity)</th><th>Precision</th><th>F1</th><th>AUROC</th></tr>
+    {% for cls, d in metrics.per_class.items() %}
+    <tr><td>{{ d.display }}</td><td>{{ "%.4f"|format(d.recall_sensitivity) }}</td>
+        <td>{{ "%.4f"|format(d.precision) }}</td><td>{{ "%.4f"|format(d.f1) }}</td>
+        <td>{{ "%.4f"|format(d.auroc_ovr) }}</td></tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>No metrics yet — run <code>python -m src.evaluate</code> after training.</p>
+  {% endif %}
+</main>
+<footer>NeuroVision — Muhammad Arshaad</footer>
+</body>
+</html>
