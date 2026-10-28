@@ -1,0 +1,72 @@
+{
+  "test_images": 1600,
+  "accuracy": 0.95625,
+  "macro_f1": 0.9557155563632169,
+  "auroc_macro_ovr": 0.9882130208333334,
+  "per_class": {
+    "glioma": {
+      "display": "Glioma",
+      "support": 400,
+      "recall_sensitivity": 0.8675,
+      "precision": 0.9830028328611898,
+      "f1": 0.9216467463479415,
+      "auroc_ovr": 0.9637458333333333
+    },
+    "meningioma": {
+      "display": "Meningioma",
+      "support": 400,
+      "recall_sensitivity": 0.98,
+      "precision": 0.9355608591885441,
+      "f1": 0.9572649572649573,
+      "auroc_ovr": 0.9933104166666668
+    },
+    "notumor": {
+      "display": "No Tumor",
+      "support": 400,
+      "recall_sensitivity": 1.0,
+      "precision": 0.9259259259259259,
+      "f1": 0.9615384615384616,
+      "auroc_ovr": 0.9969833333333333
+    },
+    "pituitary": {
+      "display": "Pituitary Tumor",
+      "support": 400,
+      "recall_sensitivity": 0.9775,
+      "precision": 0.9873737373737373,
+      "f1": 0.9824120603015075,
+      "auroc_ovr": 0.9988125
+    }
+  },
+  "confusion_matrix": [
+    [
+      347,
+      22,
+      29,
+      2
+    ],
+    [
+      2,
+      392,
+      3,
+      3
+    ],
+    [
+      0,
+      0,
+      400,
+      0
+    ],
+    [
+      4,
+      5,
+      0,
+      391
+    ]
+  ],
+  "class_order": [
+    "glioma",
+    "meningioma",
+    "notumor",
+    "pituitary"
+  ]
+}
